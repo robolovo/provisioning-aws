@@ -1,7 +1,7 @@
 variable "name" {
   description = "Name to be used on EKS cluster created"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "vpc_id" {

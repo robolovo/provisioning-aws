@@ -27,9 +27,9 @@ resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
     split(",", lookup(var.ingress_with_cidr_blocks[count.index], "cidr_blocks"))
   )
   description = lookup(var.ingress_with_cidr_blocks[count.index], "description", null)
-  from_port = lookup(var.ingress_with_cidr_blocks[count.index], "from_port")
-  to_port = lookup(var.ingress_with_cidr_blocks[count.index], "to_port")
-  protocol = lookup(var.ingress_with_cidr_blocks[count.index], "protocol")
+  from_port   = lookup(var.ingress_with_cidr_blocks[count.index], "from_port")
+  to_port     = lookup(var.ingress_with_cidr_blocks[count.index], "to_port")
+  protocol    = lookup(var.ingress_with_cidr_blocks[count.index], "protocol")
 }
 
 ##################################
@@ -46,7 +46,7 @@ resource "aws_security_group_rule" "egress_with_cidr_blocks" {
     split(",", lookup(var.egress_with_cidr_blocks[count.index], "cidr_blocks"))
   )
   description = lookup(var.egress_with_cidr_blocks[count.index], "description", null)
-  from_port = lookup(var.egress_with_cidr_blocks[count.index], "from_port")
-  to_port = lookup(var.egress_with_cidr_blocks[count.index], "to_port")
-  protocol = lookup(var.egress_with_cidr_blocks[count.index], "protocol")
+  from_port   = lookup(var.egress_with_cidr_blocks[count.index], "from_port")
+  to_port     = lookup(var.egress_with_cidr_blocks[count.index], "to_port")
+  protocol    = lookup(var.egress_with_cidr_blocks[count.index], "protocol")
 }

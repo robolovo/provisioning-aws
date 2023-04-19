@@ -15,8 +15,8 @@ resource "aws_eks_cluster" "this" {
   }
 
   depends_on = [
-    aws_iam_role_policy_attachment.cluster_AmazonEKSClusterPolicy,
-    aws_iam_role_policy_attachment.cluster_AmazonEKSVPCResourceController,
+    aws_iam_role_policy_attachment.amazon_eks_cluster_policy,
+    aws_iam_role_policy_attachment.amazon_eks_vpc_resource_controller,
   ]
 
   tags = merge(
@@ -25,7 +25,7 @@ resource "aws_eks_cluster" "this" {
 }
 
 resource "aws_eks_node_group" "this" {
-  cluster_name    = aws_eks_cluster.this.name
+  cluster_name = aws_eks_cluster.this.name
 
   node_group_name = "tf-dev-eks-node-group"
   node_role_arn   = aws_iam_role.node_group.arn
@@ -52,9 +52,9 @@ resource "aws_eks_node_group" "this" {
   }
 
   depends_on = [
-    aws_iam_role_policy_attachment.node_group_AmazonEKSWorkerNodePolicy,
-    aws_iam_role_policy_attachment.node_group_AmazonEKS_CNI_Policy,
-    aws_iam_role_policy_attachment.node_group_AmazonEC2ContainerRegistryReadOnly,
+    aws_iam_role_policy_attachment.amazon_eks_worker_node_policy,
+    aws_iam_role_policy_attachment.amazon_eks_cni_policy,
+    aws_iam_role_policy_attachment.amazon_ec2_container_registry_readonly,
   ]
 
   tags = merge(
@@ -81,12 +81,12 @@ resource "aws_iam_role" "cluster" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "cluster_AmazonEKSClusterPolicy" {
+resource "aws_iam_role_policy_attachment" "amazon_eks_cluster_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role       = aws_iam_role.cluster.name
 }
 
-resource "aws_iam_role_policy_attachment" "cluster_AmazonEKSVPCResourceController" {
+resource "aws_iam_role_policy_attachment" "amazon_eks_vpc_resource_controller" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
   role       = aws_iam_role.cluster.name
 }
@@ -110,17 +110,17 @@ resource "aws_iam_role" "node_group" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "node_group_AmazonEKSWorkerNodePolicy" {
+resource "aws_iam_role_policy_attachment" "amazon_eks_worker_node_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
   role       = aws_iam_role.node_group.name
 }
 
-resource "aws_iam_role_policy_attachment" "node_group_AmazonEKS_CNI_Policy" {
+resource "aws_iam_role_policy_attachment" "amazon_eks_cni_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
   role       = aws_iam_role.node_group.name
 }
 
-resource "aws_iam_role_policy_attachment" "node_group_AmazonEC2ContainerRegistryReadOnly" {
+resource "aws_iam_role_policy_attachment" "amazon_ec2_container_registry_readonly" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = aws_iam_role.node_group.name
 }
