@@ -3,7 +3,7 @@ module "eks-sg" {
 
   name        = "tf-eks-sg"
   description = "Security group for EKS"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = data.terraform_remote_state.this.outputs.vpc_id
 
   ingress_with_cidr_blocks = [
     {

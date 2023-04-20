@@ -3,7 +3,7 @@ module "ec2-instance-sg" {
 
   name        = "tf-ec2-sg"
   description = "Security group for EC2"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = data.terraform_remote_state.this.outputs.vpc_id
 
   ingress_with_cidr_blocks = [
     {
@@ -59,7 +59,7 @@ module "mha-manager-sg" {
 
   name        = "tf-mha-manager-sg"
   description = "Security group for EC2"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = data.terraform_remote_state.this.outputs.vpc_id
 
   ingress_with_cidr_blocks = [
     {

@@ -2,7 +2,7 @@ module "eks" {
   source = "../modules/eks"
 
   name       = "tf-eks"
-  subnet_ids = module.vpc.private_subnets
+  subnet_ids = data.terraform_remote_state.this.outputs.private_subnets
   security_group_ids = [
     module.eks-sg.security_group_id
   ]
