@@ -1,4 +1,4 @@
-module "ec2-instance" {
+module "mha-nodes" {
   source = "../modules/ec2-instance"
 
   count = 3
@@ -8,7 +8,7 @@ module "ec2-instance" {
   instance_type = "t3.medium"
   key_name      = "tf-key"
 
-  subnet_id = module.vpc.public_subnets[0]
+  subnet_id = data.terraform_remote_state.this.outputs.public_subnets[0]
   vpc_security_group_ids = [
     module.ec2-instance-sg.security_group_id
   ]
@@ -22,7 +22,7 @@ module "ec2-instance" {
   }
 }
 
-module "ec2-mha-manager" {
+module "mha-manager" {
   source = "../modules/ec2-instance"
 
   count = 1
@@ -32,7 +32,7 @@ module "ec2-mha-manager" {
   instance_type = "t3.medium"
   key_name      = "tf-key"
 
-  subnet_id = module.vpc.public_subnets[0]
+  subnet_id = data.terraform_remote_state.this.outputs.public_subnets[0]
   vpc_security_group_ids = [
     module.mha-manager-sg.security_group_id
   ]
