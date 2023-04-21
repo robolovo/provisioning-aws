@@ -1,5 +1,5 @@
 module "vpc_apne2" {
-  source = "../modules/vpc"
+  source = "../../modules/vpc"
 
   name = "tf-vpc"
   cidr = "10.0.0.0/16"

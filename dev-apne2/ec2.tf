@@ -1,4 +1,4 @@
-module "mha-nodes" {
+module "mha_node" {
   source = "../modules/ec2-instance"
 
   count = 3
@@ -10,7 +10,7 @@ module "mha-nodes" {
 
   subnet_id = data.terraform_remote_state.this.outputs.public_subnets[0]
   vpc_security_group_ids = [
-    module.ec2-instance-sg.security_group_id
+    module.mha_node_sg.security_group_id
   ]
 
   associate_public_ip_address = true
@@ -22,7 +22,7 @@ module "mha-nodes" {
   }
 }
 
-module "mha-manager" {
+module "mha_manager" {
   source = "../modules/ec2-instance"
 
   count = 1
@@ -34,7 +34,7 @@ module "mha-manager" {
 
   subnet_id = data.terraform_remote_state.this.outputs.public_subnets[0]
   vpc_security_group_ids = [
-    module.mha-manager-sg.security_group_id
+    module.mha_manager_sg.security_group_id
   ]
 
   associate_public_ip_address = true

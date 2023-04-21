@@ -1,4 +1,4 @@
-module "eks-sg" {
+module "eks_sg" {
   source = "../modules/security-group"
 
   name        = "tf-eks-sg"

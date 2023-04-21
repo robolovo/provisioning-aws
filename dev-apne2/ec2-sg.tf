@@ -1,4 +1,4 @@
-module "ec2-instance-sg" {
+module "mha_node_sg" {
   source = "../modules/security-group"
 
   name        = "tf-ec2-sg"
@@ -54,7 +54,7 @@ module "ec2-instance-sg" {
   }
 }
 
-module "mha-manager-sg" {
+module "mha_manager_sg" {
   source = "../modules/security-group"
 
   name        = "tf-mha-manager-sg"
