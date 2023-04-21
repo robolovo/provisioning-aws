@@ -10,4 +10,5 @@ repos:
     - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
     files: ^modules/
   - id: terraform_docs
-    args: ["--args=--sort-by required"]
+    args:
+    - --args=--config=.terraform-docs.yml
